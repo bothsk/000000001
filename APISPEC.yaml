@@ -1,0 +1,1435 @@
+openapi: 3.0.3
+info:
+  title: 0 API Title
+  description: 0 API description
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000/api'
+security:
+  - bearer: []
+paths:
+  /v1/items:
+    get:
+      tags:
+        - Test
+      x-router-controller: Item
+      operationId: all
+      summary: Return items array
+      description: Return items array
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  id:
+                    type: string
+                    description: item id
+                    title: item id
+                  name:
+                    type: string
+                    description: item name
+                    title: item name
+        '400':
+          description: >
+            ### BAD REQUEST
+
+            The server cannot or will not process the request due to something
+            that is perceived to be a client error (e.g., malformed request
+            syntax, invalid request message framing, or deceptive request
+            routing).
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '401':
+          description: >
+            ### UNAUTHORIZED
+
+            The request has not been applied because it lacks valid
+            authentication credentials for the target resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '403':
+          description: |
+            ### FORBIDDEN
+            The server understood the request but refuses to authorize it.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '404':
+          description: >
+            ### NOT FOUND
+
+            The origin server did not find a current representation for the
+            target resource or is not willing to disclose that one exists.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '409':
+          description: >
+            ### CONFLICT
+
+            The request could not be completed due to a conflict with the
+            current state of the target resource. This code is used in
+            situations where the user might be able to resolve the conflict and
+            resubmit the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '422':
+          description: >
+            ### UNPROCESSABLE ENTITY
+
+            Indicates that the server understands the content type of the
+            request entity, and the syntax of the request entity is correct, but
+            it was unable to process the contained instructions
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '500':
+          description: >
+            ### INTERNAL SERVER ERROR
+
+            The server encountered an unexpected condition that prevented it
+            from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '502':
+          description: >
+            ### BAD GATEWAY
+
+            The server, while acting as a gateway or proxy, received an invalid
+            response from an inbound server it accessed while attempting to
+            fulfill the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+  '/v1/items/{name}':
+    get:
+      tags:
+        - Test
+      x-router-controller: Item
+      operationId: find
+      summary: Return a item
+      description: Return a item
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: name of item to search
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: item id
+                    title: item id
+                  name:
+                    type: string
+                    description: item name
+                    title: item name
+        '400':
+          description: >
+            ### BAD REQUEST
+
+            The server cannot or will not process the request due to something
+            that is perceived to be a client error (e.g., malformed request
+            syntax, invalid request message framing, or deceptive request
+            routing).
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '401':
+          description: >
+            ### UNAUTHORIZED
+
+            The request has not been applied because it lacks valid
+            authentication credentials for the target resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '403':
+          description: |
+            ### FORBIDDEN
+            The server understood the request but refuses to authorize it.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '404':
+          description: >
+            ### NOT FOUND
+
+            The origin server did not find a current representation for the
+            target resource or is not willing to disclose that one exists.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '409':
+          description: >
+            ### CONFLICT
+
+            The request could not be completed due to a conflict with the
+            current state of the target resource. This code is used in
+            situations where the user might be able to resolve the conflict and
+            resubmit the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '422':
+          description: >
+            ### UNPROCESSABLE ENTITY
+
+            Indicates that the server understands the content type of the
+            request entity, and the syntax of the request entity is correct, but
+            it was unable to process the contained instructions
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '500':
+          description: >
+            ### INTERNAL SERVER ERROR
+
+            The server encountered an unexpected condition that prevented it
+            from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '502':
+          description: >
+            ### BAD GATEWAY
+
+            The server, while acting as a gateway or proxy, received an invalid
+            response from an inbound server it accessed while attempting to
+            fulfill the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+  /v1/create:
+    post:
+      tags:
+        - Test
+      x-router-controller: Item
+      operationId: create
+      summary: Return new items array
+      description: Return new items array
+      requestBody:
+        description: new item validation
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  id:
+                    type: string
+                    description: item id
+                    title: item id
+                  name:
+                    type: string
+                    description: item name
+                    title: item name
+        '400':
+          description: >
+            ### BAD REQUEST
+
+            The server cannot or will not process the request due to something
+            that is perceived to be a client error (e.g., malformed request
+            syntax, invalid request message framing, or deceptive request
+            routing).
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '401':
+          description: >
+            ### UNAUTHORIZED
+
+            The request has not been applied because it lacks valid
+            authentication credentials for the target resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '403':
+          description: |
+            ### FORBIDDEN
+            The server understood the request but refuses to authorize it.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '404':
+          description: >
+            ### NOT FOUND
+
+            The origin server did not find a current representation for the
+            target resource or is not willing to disclose that one exists.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '409':
+          description: >
+            ### CONFLICT
+
+            The request could not be completed due to a conflict with the
+            current state of the target resource. This code is used in
+            situations where the user might be able to resolve the conflict and
+            resubmit the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '422':
+          description: >
+            ### UNPROCESSABLE ENTITY
+
+            Indicates that the server understands the content type of the
+            request entity, and the syntax of the request entity is correct, but
+            it was unable to process the contained instructions
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '500':
+          description: >
+            ### INTERNAL SERVER ERROR
+
+            The server encountered an unexpected condition that prevented it
+            from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '502':
+          description: >
+            ### BAD GATEWAY
+
+            The server, while acting as a gateway or proxy, received an invalid
+            response from an inbound server it accessed while attempting to
+            fulfill the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+  /v1/del:
+    delete:
+      tags:
+        - Test
+      x-router-controller: Item
+      operationId: delete
+      summary: Return new items array
+      description: Return new items array
+      requestBody:
+        description: delete item validation
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  id:
+                    type: string
+                    description: item id
+                    title: item id
+                  name:
+                    type: string
+                    description: item name
+                    title: item name
+        '400':
+          description: >
+            ### BAD REQUEST
+
+            The server cannot or will not process the request due to something
+            that is perceived to be a client error (e.g., malformed request
+            syntax, invalid request message framing, or deceptive request
+            routing).
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '401':
+          description: >
+            ### UNAUTHORIZED
+
+            The request has not been applied because it lacks valid
+            authentication credentials for the target resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '403':
+          description: |
+            ### FORBIDDEN
+            The server understood the request but refuses to authorize it.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '404':
+          description: >
+            ### NOT FOUND
+
+            The origin server did not find a current representation for the
+            target resource or is not willing to disclose that one exists.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '409':
+          description: >
+            ### CONFLICT
+
+            The request could not be completed due to a conflict with the
+            current state of the target resource. This code is used in
+            situations where the user might be able to resolve the conflict and
+            resubmit the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '422':
+          description: >
+            ### UNPROCESSABLE ENTITY
+
+            Indicates that the server understands the content type of the
+            request entity, and the syntax of the request entity is correct, but
+            it was unable to process the contained instructions
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '500':
+          description: >
+            ### INTERNAL SERVER ERROR
+
+            The server encountered an unexpected condition that prevented it
+            from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '502':
+          description: >
+            ### BAD GATEWAY
+
+            The server, while acting as a gateway or proxy, received an invalid
+            response from an inbound server it accessed while attempting to
+            fulfill the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+  '/v1/update/{name}':
+    patch:
+      tags:
+        - Test
+      x-router-controller: Item
+      operationId: update
+      summary: Return new items array
+      description: Return new items array
+      parameters:
+        - in: path
+          name: name
+          required: true
+          description: name that need to update
+          schema:
+            type: string
+      requestBody:
+        description: delete item validation
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  id:
+                    type: string
+                    description: item id
+                    title: item id
+                  name:
+                    type: string
+                    description: item name
+                    title: item name
+        '400':
+          description: >
+            ### BAD REQUEST
+
+            The server cannot or will not process the request due to something
+            that is perceived to be a client error (e.g., malformed request
+            syntax, invalid request message framing, or deceptive request
+            routing).
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '401':
+          description: >
+            ### UNAUTHORIZED
+
+            The request has not been applied because it lacks valid
+            authentication credentials for the target resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '403':
+          description: |
+            ### FORBIDDEN
+            The server understood the request but refuses to authorize it.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '404':
+          description: >
+            ### NOT FOUND
+
+            The origin server did not find a current representation for the
+            target resource or is not willing to disclose that one exists.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '409':
+          description: >
+            ### CONFLICT
+
+            The request could not be completed due to a conflict with the
+            current state of the target resource. This code is used in
+            situations where the user might be able to resolve the conflict and
+            resubmit the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '422':
+          description: >
+            ### UNPROCESSABLE ENTITY
+
+            Indicates that the server understands the content type of the
+            request entity, and the syntax of the request entity is correct, but
+            it was unable to process the contained instructions
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '500':
+          description: >
+            ### INTERNAL SERVER ERROR
+
+            The server encountered an unexpected condition that prevented it
+            from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+        '502':
+          description: >
+            ### BAD GATEWAY
+
+            The server, while acting as a gateway or proxy, received an invalid
+            response from an inbound server it accessed while attempting to
+            fulfill the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    title: Return Code
+                    description: Please enter return code
+                    type: integer
+                  message:
+                    title: Return Message
+                    description: Please enter return message
+                    type: string
+                  detail:
+                    type: array
+                    title: Error detail
+                    description: Please enter error detail
+                    items:
+                      oneOf:
+                        - type: string
+                        - type: object
+components:
+  schemas:
+    Items:
+      type: array
+      properties:
+        id:
+          type: string
+          description: item id
+          title: item id
+        name:
+          type: string
+          description: item name
+          title: item name
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          description: item id
+          title: item id
+        name:
+          type: string
+          description: item name
+          title: item name
+    Request:
+      type: object
+      required:
+        - name
+      additionalProperties: false
+      properties:
+        name:
+          type: string

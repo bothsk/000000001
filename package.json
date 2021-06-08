@@ -1,0 +1,21 @@
+{
+  "name": "0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon api.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.vdc.co.th/sittikorn.p/0.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sabuytech/libsbt": "^1.1.160",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
